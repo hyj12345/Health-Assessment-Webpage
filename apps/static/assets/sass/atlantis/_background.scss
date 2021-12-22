@@ -13,6 +13,7 @@ body {
 	&[data-background-color="dark"] {
 		background: $dark-color;
 		.main-header {
+			//box-shadow: 0px 0px 5px #fff
 			box-shadow: 0px 0px 5px #121727;
 		}
 		.main-panel {
@@ -86,6 +87,7 @@ body {
 			background: #1f283e;
 		}
 		.form-control, .form-group-default, .select2-container--bootstrap .select2-selection {
+			//background-color: #1a2035;
 			background-color: #1a2035;
 			color: #fff;
 			border-color: #2f374b;
@@ -135,7 +137,7 @@ body {
 }
 
 .bg-primary {
-	background-color: $primary-color !important;
+	background-color: $secondary-color !important;
 }
 
 .bg-primary2 {

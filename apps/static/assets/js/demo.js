@@ -18,8 +18,8 @@ Circles.create({
 //Notify
 $.notify({
 	icon: 'flaticon-alarm-1',
-	title: 'Atlantis Lite',
-	message: 'Free Bootstrap 4 Admin Dashboard',
+	title: 'Hi! Dear User',
+	message: 'Welcome to the Health Assessment Webpage',
 },{
 	type: 'info',
 	placement: {
@@ -29,22 +29,87 @@ $.notify({
 	time: 1000,
 });
 
+
+
+
 // JQVmap
+var dataColor = {
+	'mo': 150,
+	'fl': 35,
+	'or': 45
+}
 $('#map-example').vectorMap(
 {
-	map: 'world_en',
+	    map: 'usa_en',
 	backgroundColor: 'transparent',
-	borderColor: '#fff',
-	borderWidth: 2,
-	color: '#e4e4e4',
-	enableZoom: true,
-	hoverColor: '#35cd3a',
-	hoverOpacity: null,
-	normalizeFunction: 'linear',
-	scaleColors: ['#b6d6ff', '#005ace'],
-	selectedColor: '#35cd3a',
-	selectedRegions: ['ID', 'RU', 'US', 'AU', 'CN', 'BR'],
-	showTooltip: true,
+          enableZoom: true,
+          showTooltip: true,
+          selectedColor: null,
+          hoverColor: null,
+          colors: {
+			  wy: '#87d36f',
+wv: '#77cf7b',
+wi: '#91d467',
+wa: '#e0d92e',
+vt: '#83d271',
+ut: '#eebb3c',
+tx: '#d7d934',
+tn: '#74ce7d',
+sd: '#94d564',
+sc: '#d3d937',
+ri: '#8dd469',
+pa: '#e5d130',
+or: '#7ad079',
+ok: '#aed851',
+oh: '#ecc237',
+ny: '#c2d943',
+nv: '#64ca8a',
+nm: '#c6d940',
+nj: '#ee9f50',
+nh: '#80d174',
+ne: '#e58e5e',
+nd: '#a3d759',
+nc: '#bed946',
+mt: '#cbd93d',
+ms: '#9bd65f',
+mo: '#98d562',
+mn: '#ec9955',
+mi: '#f0b341',
+me: '#b2d84e',
+md: '#f0ac46',
+ma: '#e9945a',
+la: '#69cb86',
+ky: '#dcd931',
+ks: '#e08962',
+in: '#cfd93a',
+il: '#71ce80',
+id: '#6ecd82',
+ia: '#aad754',
+hi: '#a7d757',
+ga: '#bad948',
+fl: '#db8566',
+de: '#66ca88',
+dc: '#61c98c',
+ct: '#9fd65c',
+co: '#efa64b',
+ca: '#e9ca33',
+az: '#5dc790',
+ar: '#6bcc84',
+al: '#8ad36c',
+ak: '#5fc88e',},
+	// map: 'world_en',
+	// backgroundColor: 'transparent',
+	// borderColor: '#fff',
+	// borderWidth: 2,
+	// color: '#e4e4e4',
+	// enableZoom: true,
+	// hoverColor: '#35cd3a',
+	// hoverOpacity: null,
+	// normalizeFunction: 'linear',
+	// scaleColors: ['#b6d6ff', '#005ace'],
+	// selectedColor: '#35cd3a',
+	// selectedRegions: ['mo', 'fl', 'or'],
+	// showTooltip: true,
 	onRegionClick: function(element, code, region)
 	{
 		return false;
@@ -52,6 +117,7 @@ $('#map-example').vectorMap(
 });
 
 //Chart
+
 
 var ctx = document.getElementById('statisticsChart').getContext('2d');
 
@@ -286,3 +352,36 @@ var myTopProductsChart = new Chart(topProductsChart, {
 		}
 	}
 });
+
+var radarChart = document.getElementById('radarChart').getContext('2d');
+var myRadarChart = new Chart(radarChart, {
+			type: 'radar',
+			data: {
+				labels: ['Running', 'Swimming', 'Eating', 'Cycling', 'Jumping'],
+				datasets: [{
+					data: [20, 10, 30, 2, 30],
+					borderColor: '#1d7af3',
+					backgroundColor : 'rgba(29, 122, 243, 0.25)',
+					pointBackgroundColor: "#1d7af3",
+					pointHoverRadius: 4,
+					pointRadius: 3,
+					label: 'Team 1'
+				}, {
+					data: [10, 20, 15, 30, 22],
+					borderColor: '#716aca',
+					backgroundColor: 'rgba(113, 106, 202, 0.25)',
+					pointBackgroundColor: "#716aca",
+					pointHoverRadius: 4,
+					pointRadius: 3,
+					label: 'Team 2'
+				},
+				]
+			},
+			options : {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend : {
+					position: 'bottom'
+				}
+			}
+		});

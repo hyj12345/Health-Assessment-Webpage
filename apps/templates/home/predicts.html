@@ -1,0 +1,656 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Assessment {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="panel-header bg-primary-gradient">
+			<div class="page-inner py-5">
+				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+					<div>
+						<h2 class="text-white pb-2 fw-bold">Health Assessment Webpage</h2>
+						<h5 class="text-white op-7 mb-2">Assess your daily health</h5>
+					</div>
+					<div class="ml-md-auto py-2 py-md-0">
+						<a href="http://127.0.0.1:5000/index" class="btn btn-white btn-border btn-round mr-2">Homepage</a>
+						<a href="http://127.0.0.1:5000/profile.html" class="btn btn-secondary btn-round">Profile</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="page-inner mt--5">
+						<div class="row row-card-no-pd mt--2">
+							<div class="col-sm-6 col-md-3">
+								<div class="card card-stats card-round">
+									<div class="card-body ">
+										<div class="row">
+											<div class="col-5">
+												<div class="icon-big text-center">
+													<i class="flaticon-users text-warning"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">Sex</p>
+													<h4 class="card-title">{{sex}}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="card card-stats card-round">
+									<div class="card-body ">
+										<div class="row">
+											<div class="col-5">
+												<div class="icon-big text-center">
+													<i class="flaticon-clock text-success"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">Age</p>
+													<h4 class="card-title">{{age}}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="card card-stats card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-5">
+												<div class="icon-big text-center">
+													<i class="flaticon-box-3 text-danger"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">Occupation</p>
+													<h4 class="card-title">Student</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6 col-md-3">
+								<div class="card card-stats card-round">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-5">
+												<div class="icon-big text-center">
+													<i class="flaticon-network text-primary"></i>
+												</div>
+											</div>
+											<div class="col-7 col-stats">
+												<div class="numbers">
+													<p class="card-category">BMI</p>
+													<h4 class="card-title">{{BMI}}</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+			<div class="row mt--2">
+				<div class="col-md-6">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Health Score</div>
+							<div class="card-category">Predicted health score based on model</div>
+							<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+								<div class="px-2 pb-2 pb-md-0 text-center">
+									<div id="gauge"></div>
+									<h6 class="fw-bold mt-3 mb-0"></h6>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card full-height">
+
+						<div class="card-body">
+							<div class="card-title">Historical Prediction Score</div>
+							<div class="row py-3">
+								<div class="col-md-3 d-flex flex-column justify-content-around">
+									<div>
+										<h6 class="fw-bold text-uppercase text-success op-8">Excellent</h6>
+										<h3 class="fw-bold">80-100</h3>
+									</div>
+
+									<div>
+										<h6 class="fw-bold text-uppercase text-primary op-8">Very Good</h6>
+										<h3 class="fw-bold">60-79</h3>
+									</div>
+
+									<div>
+										<h6 class="fw-bold text-uppercase text-info op-8">Good</h6>
+										<h3 class="fw-bold">40-59</h3>
+									</div>
+
+									<div>
+										<h6 class="fw-bold text-uppercase text-warning op-8">Fair</h6>
+										<h3 class="fw-bold">20-39</h3>
+									</div>
+
+									<div>
+										<h6 class="fw-bold text-uppercase text-danger op-8">Poor</h6>
+										<h3 class="fw-bold">0-19</h3>
+									</div>
+								</div>
+
+									<div id="chart-container">
+										<canvas id="totalIncomeChart"></canvas>
+									</div>
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-8">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-head-row">
+								<div class="card-title">Radar Chart</div>
+								<div class="card-tools">
+<!--									<a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">-->
+<!--										<span class="btn-label">-->
+<!--											<i class="fa fa-pencil"></i>-->
+<!--										</span>-->
+<!--										Export-->
+<!--									</a>-->
+<!--									<a href="#" class="btn btn-info btn-border btn-round btn-sm">-->
+<!--										<span class="btn-label">-->
+<!--											<i class="fa fa-print"></i>-->
+<!--										</span>-->
+<!--										Print-->
+<!--									</a>-->
+								</div>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="chart-container" style="min-height: 375px">
+								<canvas id="totalIncomeChart1"></canvas>
+<!--								statisticsChart-->
+							</div>
+							<div id="myChartLegend"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4"prediction_tex>
+                    <div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-info bubble-shadow-small">
+										<i class="flaticon-interface-6"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Health Level</p>
+										<h4 class="card-title">{{prediction_level}}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					 <div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-success bubble-shadow-small">
+										<i class="flaticon-graph"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Obesity Level</p>
+
+										<h4 class="card-title">{{obesity_level}}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="card card-stats card-round">
+						<div class="card-body ">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-primary bubble-shadow-small">
+										<i class="flaticon-users"></i>
+									</div>
+								</div>
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Groups</p>
+										<h4 class="card-title">{{groups}} ({{groups_ratio}})</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="card card-stats card-round">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-icon">
+									<div class="icon-big text-center icon-secondary bubble-shadow-small">
+										<i class="flaticon-success"></i>
+									</div>
+								</div>
+
+								<div class="col col-stats ml-3 ml-sm-0">
+									<div class="numbers">
+										<p class="card-category">Tips</p>
+<!--										<h4 class="card-title">-->
+<!--										<b>var1 = {{sleptim1}}</b></body><br>-->
+<!--										 {%if sleptim1 == 0%}-->
+<!--											<a href="https://github.com/hyj12345" >0</a>-->
+<!--										{%endif%}-->
+<!--										{%if sleptim1 != 0%}-->
+										After analysis, your health score is {{prediction_text}}!<br />
+										For better health, you are adviced to<br />
+										<a href="https://www.sleepfoundation.org/" > (1) {{sleep_tip}};</a><br />
+										<a href="https://www.webmd.com/fitness-exercise/default.htm" > (2) {{exer_tip}};</a><br />
+										<a href="https://www.nia.nih.gov/health/maintaining-healthy-weight" > (3) {{bmi_tip}}</a>.
+<!--										{%endif%}-->
+
+<!--										</h4>-->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="row row-card-no-pd">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Historical Recording</div>
+						</div>
+						<div class="card-body">
+<!--							<div class="card-sub">-->
+<!--								Your historical sleep and exercise records.-->
+<!--							</div>-->
+							<div class="chart-container">
+								<canvas id="htmlLegendsChart"></canvas>
+							</div>
+							<div id="myChartLegend"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="/static/assets/js/setting-demo.js"></script>
+	<script src="/static/assets/js/demo.js"></script>
+    <script src="/static/assets/js/setting-demo2.js"></script>
+<!--    <script src="/static/assets/js/raphael.2.1.4.min.js"></script>-->
+<!--    <script src="/static/assets/js/justgage.js"></script>-->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.9/justgage.min.js"></script>
+
+
+	<script>
+		Circles.create({
+			id:'circles-1',
+			radius:45,
+			value:60,
+			maxValue:100,
+			width:7,
+			text: 5,
+			colors:['#f1f1f1', '#FF9E27'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-2',
+			radius:45,
+			value:70,
+			maxValue:100,
+			width:7,
+			text: 36,
+			colors:['#f1f1f1', '#2BB930'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+		Circles.create({
+			id:'circles-3',
+			radius:45,
+			value:40,
+			maxValue:100,
+			width:7,
+			text: 12,
+			colors:['#f1f1f1', '#F25961'],
+			duration:400,
+			wrpClass:'circles-wrp',
+			textClass:'circles-text',
+			styleWrapper:true,
+			styleText:true
+		})
+
+
+		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
+		var mytotalIncomeChart = new Chart(totalIncomeChart, {
+			type: 'line',
+			data: {
+				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "Aug", "Sep",'Oct','Nov' ,"Dec"],
+				datasets : [{
+					label: "Historical Health Score",
+					backgroundColor: 'transparent',
+					borderColor: '#ff9e27',
+					data: [60, 40, 50, 50, 60, 66, 70, 65, 60, 0,0,{{prediction_text}}],
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: false,
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							display: false //this will remove only the label
+						},
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}],
+					xAxes : [ {
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}]
+				},
+			}
+		});
+
+
+		var totalIncomeChart1 = document.getElementById('totalIncomeChart1').getContext('2d');
+		var mytotalIncomeChart1 = new Chart(totalIncomeChart1, {
+			type: 'radar',
+			data: {
+				labels: ['Sleeping', 'Exercising', 'Strength', 'Number of diseases', 'BMI'],
+				datasets: [{
+					data: [{{sleptim1}},{{exerhmm}}, {{strength}}, {{n_diseases}}, {{BMI}}],
+					borderColor: '#1d7af3',
+					backgroundColor : 'rgba(29, 122, 243, 0.25)',
+					pointBackgroundColor: "#1d7af3",
+					pointHoverRadius: 4,
+					pointRadius: 3,
+					label: 'User'
+				}, {
+					data: [{{s_sleep}}, {{s_exerhmm}}, {{s_strength}}, {{s_disease}}, {{s_BMI}}],
+					borderColor: '#716aca',
+					backgroundColor: 'rgba(113, 106, 202, 0.25)',
+					pointBackgroundColor: "#716aca",
+					pointHoverRadius: 4,
+					pointRadius: 3,
+					label: 'Similar Group'
+				},
+		{
+					data: [{{b_sleep}}, {{b_exerhmm}}, {{b_strength}}, {{b_disease}}, {{b_BMI}}],
+					borderColor: '#7dca6a',
+					backgroundColor: 'rgba(113, 106, 202, 0.25)',
+					pointBackgroundColor: "#6aca6a",
+					pointHoverRadius: 4,
+					pointRadius: 3,
+					label: 'Excellent Group'
+				}
+				]
+			},
+			options : {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend : {
+					position: 'bottom'
+				}
+			}
+		});
+
+
+
+		$('#lineChart').sparkline([102,109,120,99,110,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#177dff',
+			fillColor: 'rgba(23, 125, 255, 0.14)'
+		});
+
+		$('#lineChart2').sparkline([99,125,122,105,110,124,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#f3545d',
+			fillColor: 'rgba(243, 84, 93, .14)'
+		});
+
+		$('#lineChart3').sparkline([105,103,123,100,95,105,115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: '#ffa534',
+			fillColor: 'rgba(255, 165, 52, .14)'
+		});
+
+		var myColors = [
+  "#ff0000","#f9c802","#a9d70b"
+];
+		var g = new JustGage({
+			id: "gauge",
+			value: {{prediction_text}},
+		    min:0,
+					max:100,
+				label:"Health Score",
+				levelColors:myColors
+		});
+
+        var htmlLegendsChart = document.getElementById('htmlLegendsChart').getContext('2d');
+
+		var gradientStroke = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientStroke.addColorStop(0, '#92e89f');
+		gradientStroke.addColorStop(1, '#c7fa6e');
+
+		var gradientFill = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientFill.addColorStop(0, '#bbf556');
+		gradientFill.addColorStop(1, "#d9f5a9");
+
+		var gradientStroke2 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientStroke2.addColorStop(0, '#f3545d');
+		gradientStroke2.addColorStop(1, '#ff8990');
+
+		var gradientFill2 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientFill2.addColorStop(0, "rgba(243, 84, 93, 0.7)");
+		gradientFill2.addColorStop(1, "rgba(255, 137, 144, 0.3)");
+
+		var gradientStroke3 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientStroke3.addColorStop(0, '#fdaf4b');
+		gradientStroke3.addColorStop(1, '#ffc478');
+
+		var gradientFill3 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientFill3.addColorStop(0, "rgba(253, 175, 75, 0.7)");
+		gradientFill3.addColorStop(1, "rgba(255, 196, 120, 0.3)");
+
+		var gradientStroke4 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientStroke4.addColorStop(0, '#707fc4');
+		gradientStroke4.addColorStop(1, '#91a1ed');
+
+		var gradientFill4 = htmlLegendsChart.createLinearGradient(500, 0, 100, 0);
+		gradientFill4.addColorStop(0, "#9faded");
+		gradientFill4.addColorStop(1, "#b4beed");
+
+		var myHtmlLegendsChart = new Chart(htmlLegendsChart, {
+			type: 'line',
+			data: {
+				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+				datasets: [
+
+						{
+					label: "Sleep Time",
+					borderColor: gradientStroke2,
+					pointBackgroundColor: gradientStroke2,
+					pointRadius: 0,
+					backgroundColor: gradientFill2,
+					legendColor: '#f3545d',
+					fill: true,
+					borderWidth: 1,
+					data: [15, 18, 17, 10, 11, 13, 14, 7, 15, 11, 12, {{sleptim1}}]
+				},
+		{
+					label: "Aerobic Exercise Time",
+					borderColor: gradientStroke3,
+					pointBackgroundColor: gradientStroke3,
+					pointRadius: 0,
+					backgroundColor: gradientFill3,
+					legendColor: '#fdaf4b',
+					fill: true,
+					borderWidth: 1,
+					data: [26, 2, 5, 7, 2, 5, 3, 9, 1, 4, 6, {{exerhmm1}}]
+				},
+
+		{
+					label: "Anaerobic Exercise Time",
+					borderColor: gradientStroke4,
+					pointBackgroundColor: gradientStroke4,
+					pointRadius: 0,
+					backgroundColor: gradientFill4,
+					legendColor: '#707fc4',
+					fill: true,
+					borderWidth: 1,
+					data: [0, 10, 15, 0, 10, 25, 7, 19, 10, 20, 12, {{strength}}]
+				},
+		{label: "Weight",
+					borderColor: gradientStroke,
+					pointBackgroundColor: gradientStroke,
+					pointRadius: 0,
+					backgroundColor: gradientFill,
+					legendColor: '#92e89f',
+					fill: true,
+					borderWidth: 1,
+					data: [60, 59, 58, 62, 61, 59, 58, 57, 56, 55, 57, {{wtkg}}]
+				}]},
+
+			options : {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					display: false
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:5,right:5,top:5,bottom:5}
+
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							fontColor: "rgba(0,0,0,0.5)",
+							fontStyle: "500",
+							beginAtZero: false,
+							maxTicksLimit: 5,
+							padding: 20
+						},
+						gridLines: {
+							drawTicks: false,
+							display: false
+						}
+					}],
+					xAxes: [{
+						gridLines: {
+							zeroLineColor: "transparent"
+						},
+						ticks: {
+							padding: 20,
+							fontColor: "rgba(0,0,0,0.5)",
+							fontStyle: "500"
+						}
+					}]
+				},
+				legendCallback: function(chart) {
+					var text = [];
+					text.push('<ul class="' + chart.id + '-legend html-legend">');
+					for (var i = 0; i < chart.data.datasets.length; i++) {
+						text.push('<li><span style="background-color:' + chart.data.datasets[i].legendColor + '"></span>');
+						if (chart.data.datasets[i].label) {
+							text.push(chart.data.datasets[i].label);
+						}
+						text.push('</li>');
+					}
+					text.push('</ul>');
+					return text.join('');
+				}
+			}
+		});
+
+		var myLegendContainer = document.getElementById("myChartLegend");
+
+		// generate HTML legend
+		myLegendContainer.innerHTML = myHtmlLegendsChart.generateLegend();
+
+		// bind onClick event to all LI-tags of the legend
+		var legendItems = myLegendContainer.getElementsByTagName('li');
+		for (var i = 0; i < legendItems.length; i += 1) {
+			legendItems[i].addEventListener("click", legendClickCallback, false);
+		}
+
+	</script>
+
+{% endblock javascripts %}

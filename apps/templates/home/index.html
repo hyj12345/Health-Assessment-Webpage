@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 
-{% block title %} Dashboard {% endblock %} 
+{% block title %} Homepage {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}{% endblock stylesheets %}
@@ -12,128 +12,222 @@
 			<div class="page-inner py-5">
 				<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
 					<div>
-						<h2 class="text-white pb-2 fw-bold">Dashboard</h2>
-						<h5 class="text-white op-7 mb-2">Free Bootstrap 4 Admin Dashboard</h5>
+						<h2 class="text-white pb-2 fw-bold">Health Assessment Webpage</h2>
+						<h5 class="text-white op-7 mb-2">Assess your daily health</h5>
 					</div>
 					<div class="ml-md-auto py-2 py-md-0">
-						<a href="#" class="btn btn-white btn-border btn-round mr-2">Manage</a>
-						<a href="#" class="btn btn-secondary btn-round">Add Customer</a>
+						<a href="http://127.0.0.1:5000/index" class="btn btn-white btn-border btn-round mr-2">Homepage</a>
+						<a href="http://127.0.0.1:5000/profile.html" class="btn btn-secondary btn-round">Profile</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="page-inner mt--5">
-			<div class="row mt--2">
-				<div class="col-md-6">
+
+			<div class="row">
+				<div class="col-md-5">
 					<div class="card full-height">
 						<div class="card-body">
-							<div class="card-title">Overall statistics</div>
-							<div class="card-category">Daily information about statistics in system</div>
+							<div class="card-title">Data Description</div>
+							<div class="card-category">Data Sources and Basic Information</div>
 							<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
-								<div class="px-2 pb-2 pb-md-0 text-center">
-									<div id="circles-1"></div>
-									<h6 class="fw-bold mt-3 mb-0">New Users</h6>
-								</div>
-								<div class="px-2 pb-2 pb-md-0 text-center">
-									<div id="circles-2"></div>
-									<h6 class="fw-bold mt-3 mb-0">Sales</h6>
-								</div>
-								<div class="px-2 pb-2 pb-md-0 text-center">
-									<div id="circles-3"></div>
-									<h6 class="fw-bold mt-3 mb-0">Subscribers</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card full-height">
-						<div class="card-body">
-							<div class="card-title">Total income & spend statistics</div>
-							<div class="row py-3">
-								<div class="col-md-4 d-flex flex-column justify-content-around">
-									<div>
-										<h6 class="fw-bold text-uppercase text-success op-8">Total Income</h6>
-										<h3 class="fw-bold">$9.782</h3>
-									</div>
-									<div>
-										<h6 class="fw-bold text-uppercase text-danger op-8">Total Spend</h6>
-										<h3 class="fw-bold">$1,248</h3>
-									</div>
-								</div>
-								<div class="col-md-8">
-									<div id="chart-container">
+								<div id="chart-container">
 										<canvas id="totalIncomeChart"></canvas>
 									</div>
+								<div class="card card-info card-annoucement card-round">
+						<div class="card-body text-center">
+							<div class="card-opening">Welcome {{ current_user.username }},</div>
+							<div class="card-desc">
+								We use the BRFSS-2013 to train the model and evlauate your personal health. BRFSS means The Behavioral Risk Factor Surveillance System.
+								BRFSS-2013 measures behavioural risk factors for the non-institutionalized adult population residing in the US by Land-Line and Cell-Phone.
+								29 of the 330 features with a 491775 samples were used to train Xgboost model.
+								</div>
+
+							<div class="card-detail">
+									<a href="https://www.cdc.gov/brfss/index.html" class="btn btn-light btn-rounded ">Find More Information</a>
+							</div>
+						</div>
+					</div>
+
+								</div>
+
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-7">
+					<div class="card full-height">
+						<div class="card-body">
+							<div class="card-title">Health Assessment</div>
+							<div class="row py-3">
+
+								<div class="col-md-10">
+									<form action="/index/predicts" method="GET">
+
+										<div class="form-group form-group-default">
+										<label>Unique ID</label>
+										<input id="Name" type="text" class="form-control" name="uniqueid" placeholder="unique id" required="required">
+									</div>
+
+									<div class="form-group form-group-default">
+										<label>Weight (Kilograms)</label>
+										<input id="Name" type="text" class="form-control" name="weight" placeholder="weight" required="required">
+									</div>
+											<div class="form-group form-group-default">
+										<label>Anaerobic Exercise Time(min)</label>
+										<input id="Name" type="text" class="form-control" name="strength" placeholder="muscle training time" required="required">
+									</div>
+
+											<div class="form-group form-group-default">
+										<label>Types of aerobic exercise</label>
+										<input id="Name" type="text" class="form-control" name="exact" placeholder="aerobic exercise times" required="required">
+									</div>
+
+												<div class="form-group form-group-default">
+										<label>Aerobic Exercise Time (min)</label>
+										<input id="Name" type="text" class="form-control" name="exerhmm1" placeholder="aerobic exercise time" required="required">
+									</div>
+												<div class="form-group form-group-default">
+										<label>Sleep Time (h)</label>
+										<input id="Name" type="text" class="form-control" name="sleeptime" placeholder="sleep time" required="required">
+									</div>
+
+											<small id="emailHelp2" class="form-text text-muted">We will never collect your private information</small>
+<!--										<button class="btn btn-success">Submit</button>-->
+
+										<button class="btn btn-success" id="alert_demo_3_3">Assess Now</button>
+
+
+<!--							           <button class="btn btn-danger">Cancel</button>-->
+
+
+                                       </form>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+
+
 			<div class="row">
-				<div class="col-md-8">
-					<div class="card">
+
+				<div class="col-md-7">
+				<div class="card">
 						<div class="card-header">
-							<div class="card-head-row">
-								<div class="card-title">User Statistics</div>
-								<div class="card-tools">
-									<a href="#" class="btn btn-info btn-border btn-round btn-sm mr-2">
-										<span class="btn-label">
-											<i class="fa fa-pencil"></i>
-										</span>
-										Export
-									</a>
-									<a href="#" class="btn btn-info btn-border btn-round btn-sm">
-										<span class="btn-label">
-											<i class="fa fa-print"></i>
-										</span>
-										Print
-									</a>
-								</div>
-							</div>
+							<h4 class="card-title">Data Visualisation</h4>
 						</div>
 						<div class="card-body">
-							<div class="chart-container" style="min-height: 375px">
-								<canvas id="statisticsChart"></canvas>
+							<ul class="nav nav-pills nav-secondary nav-pills-no-bd" id="pills-tab-without-border" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="pills-home-tab-nobd" data-toggle="pill" href="#pills-home-nobd" role="tab" aria-controls="pills-home-nobd" aria-selected="true">Health Level</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pills-profile-tab-nobd" data-toggle="pill" href="#pills-profile-nobd" role="tab" aria-controls="pills-profile-nobd" aria-selected="false">Sex</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="pills-contact-tab-nobd" data-toggle="pill" href="#pills-contact-nobd" role="tab" aria-controls="pills-contact-nobd" aria-selected="false">Sleep and Exercise Time</a>
+								</li>
+							</ul>
+							<div class="tab-content mt-2 mb-3" id="pills-without-border-tabContent">
+								<div class="tab-pane fade show active" id="pills-home-nobd" role="tabpanel" aria-labelledby="pills-home-tab-nobd">
+									<div class="card-body">
+							<div class="chart-container">
+								<canvas id="doughnutChart" style="width: 50%; height: 50%"></canvas>
 							</div>
-							<div id="myChartLegend"></div>
+						</div>
+								</div>
+								<div class="tab-pane fade" id="pills-profile-nobd" role="tabpanel" aria-labelledby="pills-profile-tab-nobd">
+									<div class="card-body">
+							<div class="chart-container">
+								<canvas id="multipleBarChart"></canvas>
+							</div>
+						</div>
+								</div>
+								<div class="tab-pane fade" id="pills-contact-nobd" role="tabpanel" aria-labelledby="pills-contact-tab-nobd">
+								<div class="card-body">
+							<div class="chart-container">
+								<canvas id="multipleLineChart"></canvas>
+							</div>
+						</div></div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="card card-primary">
-						<div class="card-header">
-							<div class="card-title">Daily Sales</div>
-							<div class="card-category">March 25 - April 02</div>
-						</div>
-						<div class="card-body pb-0">
-							<div class="mb-4 mt-2">
-								<h1>$4,578.58</h1>
-							</div>
-							<div class="pull-in">
-								<canvas id="dailySalesChart"></canvas>
-							</div>
-						</div>
-					</div>
+				<div class="col-md-5">
 					<div class="card">
-						<div class="card-body pb-0">
-							<div class="h1 fw-bold float-right text-warning">+7%</div>
-							<h2 class="mb-2">213</h2>
-							<p class="text-muted">Transactions</p>
-							<div class="pull-in sparkline-fix">
-								<div id="lineChart"></div>
+						<div class="card-header">
+							<h4 class="card-title">Typical Persona</h4>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-5 col-md-4">
+									<div class="nav flex-column nav-pills nav-secondary nav-pills-no-bd" id="v-pills-tab-without-border" role="tablist" aria-orientation="vertical">
+										<a class="nav-link active" id="v-pills-home-tab-nobd" data-toggle="pill" href="#v-pills-home-nobd" role="tab" aria-controls="v-pills-home-nobd" aria-selected="true">Excellent</a>
+										<a class="nav-link" id="v-pills-profile-tab-nobd" data-toggle="pill" href="#v-pills-profile-nobd" role="tab" aria-controls="v-pills-profile-nobd" aria-selected="false">Very Good</a>
+										<a class="nav-link" id="v-pills-messages-tab-nobd" data-toggle="pill" href="#v-pills-messages-nobd" role="tab" aria-controls="v-pills-messages-nobd" aria-selected="false">Good</a>
+										<a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Fair</a>
+                                        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Poor</a>
+									</div>
+								</div>
+								<div class="col-7 col-md-8">
+									<div class="tab-content" id="v-pills-without-border-tabContent">
+										<div class="tab-pane fade show active" id="v-pills-home-nobd" role="tabpanel" aria-labelledby="v-pills-home-tab-nobd">
+											<p><span class="h3">Married Female</span></p>
+											<p><span class="h3">$75,000 or more</span></p>
+											<p><span class="h3">50 to 54 years old</span></p>
+                                            <p><span class="h3">No Pre-existing disease</span></p>
+											<p><span class="h3">Smoking score is -0.26</span></p>
+											<p><span class="h3">44 drinks of alcohol beverages per day</span></p>
+										</div>
+										<div class="tab-pane fade" id="v-pills-profile-nobd" role="tabpanel" aria-labelledby="v-pills-profile-tab-nobd">
+											<p><span class="h3">Married Female</span></p>
+											<p><span class="h3">$75,000 or more</span></p>
+											<p><span class="h3">60 to 64 years old</span></p>
+                                            <p><span class="h3">No Pre-existing disease</span></p>
+											<p><span class="h3">Smoking score is -0.49</span></p>
+											<p><span class="h3">41 drinks of alcohol beverages per day</span></p>
+										</div>
+										<div class="tab-pane fade" id="v-pills-messages-nobd" role="tabpanel" aria-labelledby="v-pills-messages-tab-nobd">
+                                            <p><span class="h3">Married Female</span></p>
+											<p><span class="h3">$75,000 or more</span></p>
+											<p><span class="h3">60 to 64 years old</span></p>
+                                            <p><span class="h3">No Pre-existing disease</span></p>
+											<p><span class="h3">Smoking score is -0.89</span></p>
+											<p><span class="h3">36 drinks of alcohol beverages per day</span></p>
+										</div>
+								        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+											<p><span class="h3">Married Female</span></p>
+											<p><span class="h3">Less than $20,000</span></p>
+											<p><span class="h3">80 to older years old</span></p>
+                                            <p><span class="h3">Arthritis Blood/Pressure High/Blood Cholesterol High</span></p>
+											<p><span class="h3">Smoking score is -1.23</span></p>
+											<p><span class="h3">28 drinks of alcohol beverages per day</span></p>
+										</div>
+										<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                                            <p><span class="h3">Married Female</span></p>
+											<p><span class="h3">Less than $10,000</span></p>
+											<p><span class="h3">55 to 59 years old</span></p>
+                                            <p><span class="h3">Arthritis Blood/Pressure High/Blood Cholesterol High</span></p>
+											<p><span class="h3">Smoking score is -1.51</span></p>
+											<p><span class="h3">23 drinks of alcohol beverages per day</span></p>
+									</div>
+									</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
+
+			</div>
+
 			<div class="row row-card-no-pd">
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
 							<div class="card-head-row card-tools-still-right">
-								<h4 class="card-title">Users Geolocation</h4>
+								<h4 class="card-title">Users Geographical Distribution</h4>
 								<div class="card-tools">
 									<button class="btn btn-icon btn-link btn-primary btn-xs"><span class="fa fa-angle-down"></span></button>
 									<button class="btn btn-icon btn-link btn-primary btn-xs btn-refresh-card"><span class="fa fa-sync-alt"></span></button>
@@ -141,103 +235,74 @@
 								</div>
 							</div>
 							<p class="card-category">
-							Map of the distribution of users around the world</p>
+							Top 5 states for users</p>
 						</div>
 						<div class="card-body">
 							<div class="row">
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="table-responsive table-hover table-sales">
 										<table class="table">
 											<tbody>
+
 												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/id.png" alt="indonesia">
-														</div>
-													</td>
-													<td>Indonesia</td>
+
+													<td>Florida</td>
 													<td class="text-right">
-														2.320
+														33305
 													</td>
 													<td class="text-right">
-														42.18%
+														6.8%
 													</td>
 												</tr>
 												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/us.png" alt="united states">
-														</div>
-													</td>
-													<td>USA</td>
+
+													<td>Kansas</td>
 													<td class="text-right">
-														240
+														23228
 													</td>
 													<td class="text-right">
-														4.36%
+														4.8%
 													</td>
 												</tr>
 												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/au.png" alt="australia">
-														</div>
-													</td>
-													<td>Australia</td>
+
+													<td>Nebraska</td>
 													<td class="text-right">
-														119
+														17106
 													</td>
 													<td class="text-right">
-														2.16%
+														3.5%
 													</td>
 												</tr>
 												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/ru.png" alt="russia">
-														</div>
-													</td>
-													<td>Russia</td>
+
+													<td>Massachusetts</td>
 													<td class="text-right">
-														1.081
+														15042
 													</td>
 													<td class="text-right">
-														19.65%
+														3.1%
 													</td>
 												</tr>
 												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/cn.png" alt="china">
-														</div>
-													</td>
-													<td>China</td>
+
+													<td>Minnesota</td>
 													<td class="text-right">
-														1.100
+														14299
 													</td>
 													<td class="text-right">
-														20%
+														2.9%
 													</td>
 												</tr>
-												<tr>
-													<td>
-														<div class="flag">
-															<img src="/static/assets/img/flags/br.png" alt="brazil">
-														</div>
-													</td>
-													<td>Brasil</td>
-													<td class="text-right">
-														640
-													</td>
-													<td class="text-right">
-														11.63%
-													</td>
-												</tr>
+
+
+
+
 											</tbody>
 										</table>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-8">
 									<div class="mapcontainer">
 										<div id="map-example" class="vmap"></div>
 									</div>
@@ -247,280 +312,101 @@
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
+
+
+
+			<div class="row mt--2">
+				<div class="col-md-8">
+
 					<div class="card">
 						<div class="card-header">
-							<div class="card-title">Top Products</div>
+							<div class="card-title">Correlation Bubble Chart</div>
 						</div>
-						<div class="card-body pb-0">
-							<div class="d-flex">
-								<div class="avatar">
-									<img src="/static/assets/img/logoproduct.svg" alt="..." class="avatar-img rounded-circle">
-								</div>
-								<div class="flex-1 pt-1 ml-2">
-									<h6 class="fw-bold mb-1">CSS</h6>
-									<small class="text-muted">Cascading Style Sheets</small>
-								</div>
-								<div class="d-flex ml-auto align-items-center">
-									<h3 class="text-info fw-bold">+$17</h3>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar">
-									<img src="/static/assets/img/logoproduct.svg" alt="..." class="avatar-img rounded-circle">
-								</div>
-								<div class="flex-1 pt-1 ml-2">
-									<h6 class="fw-bold mb-1">J.CO Donuts</h6>
-									<small class="text-muted">The Best Donuts</small>
-								</div>
-								<div class="d-flex ml-auto align-items-center">
-									<h3 class="text-info fw-bold">+$300</h3>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar">
-									<img src="/static/assets/img/logoproduct3.svg" alt="..." class="avatar-img rounded-circle">
-								</div>
-								<div class="flex-1 pt-1 ml-2">
-									<h6 class="fw-bold mb-1">Ready Pro</h6>
-									<small class="text-muted">Bootstrap 4 Admin Dashboard</small>
-								</div>
-								<div class="d-flex ml-auto align-items-center">
-									<h3 class="text-info fw-bold">+$350</h3>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="pull-in">
-								<canvas id="topProductsChart"></canvas>
+						<div class="card-body">
+							<div class="chart-container">
+								<canvas id="bubbleChart"></canvas>
 							</div>
 						</div>
 					</div>
 				</div>
+
 				<div class="col-md-4">
-					<div class="card">
-						<div class="card-body">
-							<div class="card-title fw-mediumbold">Suggested People</div>
-							<div class="card-list">
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">Jimmy Denis</div>
-										<div class="status">Graphic Designer</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/chadengle.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">Chad</div>
-										<div class="status">CEO Zeleaf</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">Talha</div>
-										<div class="status">Front End Designer</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/mlane.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">John Doe</div>
-										<div class="status">Back End Developer</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/talha.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">Talha</div>
-										<div class="status">Front End Designer</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-								<div class="item-list">
-									<div class="avatar">
-										<img src="/static/assets/img/jm_denis.jpg" alt="..." class="avatar-img rounded-circle">
-									</div>
-									<div class="info-user ml-3">
-										<div class="username">Jimmy Denis</div>
-										<div class="status">Graphic Designer</div>
-									</div>
-									<button class="btn btn-icon btn-primary btn-round btn-xs">
-										<i class="fa fa-plus"></i>
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="card card-primary bg-primary-gradient">
-						<div class="card-body">
-							<h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>
-							<h1 class="mb-4 fw-bold">17</h1>
-							<h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>
-							<div id="activeUsersChart"></div>
-							<h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>
-							<ul class="list-unstyled">
-								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li>
-								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
 					<div class="card full-height">
-						<div class="card-header">
-							<div class="card-title">Feed Activity</div>
-						</div>
 						<div class="card-body">
-							<ol class="activity-feed">
-								<li class="feed-item feed-item-secondary">
-									<time class="date" datetime="9-25">Sep 25</time>
-									<span class="text">Responded to need <a href="#">"Volunteer opportunity"</a></span>
-								</li>
-								<li class="feed-item feed-item-success">
-									<time class="date" datetime="9-24">Sep 24</time>
-									<span class="text">Added an interest <a href="#">"Volunteer Activities"</a></span>
-								</li>
-								<li class="feed-item feed-item-info">
-									<time class="date" datetime="9-23">Sep 23</time>
-									<span class="text">Joined the group <a href="single-group.php">"Boardsmanship Forum"</a></span>
-								</li>
-								<li class="feed-item feed-item-warning">
-									<time class="date" datetime="9-21">Sep 21</time>
-									<span class="text">Responded to need <a href="#">"In-Kind Opportunity"</a></span>
-								</li>
-								<li class="feed-item feed-item-danger">
-									<time class="date" datetime="9-18">Sep 18</time>
-									<span class="text">Created need <a href="#">"Volunteer Opportunity"</a></span>
-								</li>
-								<li class="feed-item">
-									<time class="date" datetime="9-17">Sep 17</time>
-									<span class="text">Attending the event <a href="single-event.php">"Some New Event"</a></span>
-								</li>
-							</ol>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card full-height">
-						<div class="card-header">
-							<div class="card-head-row">
-								<div class="card-title">Support Tickets</div>
-								<div class="card-tools">
-									<ul class="nav nav-pills nav-secondary nav-pills-no-bd nav-sm" id="pills-tab" role="tablist">
-										<li class="nav-item">
-											<a class="nav-link" id="pills-today" data-toggle="pill" href="#pills-today" role="tab" aria-selected="true">Today</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link active" id="pills-week" data-toggle="pill" href="#pills-week" role="tab" aria-selected="false">Week</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" id="pills-month" data-toggle="pill" href="#pills-month" role="tab" aria-selected="false">Month</a>
-										</li>
-									</ul>
-								</div>
+							<div class="card-title">Feature Importance</div>
+							<div class="card-category">Important features influence your health</div>
+							<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
+											<div class="chart-container">
+								<canvas id="barChart"></canvas>
 							</div>
-						</div>
-						<div class="card-body">
-							<div class="d-flex">
-								<div class="avatar avatar-online">
-									<span class="avatar-title rounded-circle border border-white bg-info">J</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Joko Subianto <span class="text-warning pl-3">pending</span></h6>
-									<span class="text-muted">I am facing some trouble with my viewport. When i start my</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">8:40 PM</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-offline">
-									<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Prabowo Widodo <span class="text-success pl-3">open</span></h6>
-									<span class="text-muted">I have some query regarding the license issue.</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">1 Day Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-away">
-									<span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Lee Chong Wei <span class="text-muted pl-3">closed</span></h6>
-									<span class="text-muted">Is there any update plan for RTL version near future?</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Days Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-offline">
-									<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Peter Parker <span class="text-success pl-3">open</span></h6>
-									<span class="text-muted">I have some query regarding the license issue.</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Day Ago</small>
-								</div>
-							</div>
-							<div class="separator-dashed"></div>
-							<div class="d-flex">
-								<div class="avatar avatar-away">
-									<span class="avatar-title rounded-circle border border-white bg-danger">L</span>
-								</div>
-								<div class="flex-1 ml-3 pt-1">
-									<h6 class="text-uppercase fw-bold mb-1">Logan Paul <span class="text-muted pl-3">closed</span></h6>
-									<span class="text-muted">Is there any update plan for RTL version near future?</span>
-								</div>
-								<div class="float-right pt-1">
-									<small class="text-muted">2 Days Ago</small>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 			</div>
+
+
+
+
+<!--			<div class="row">-->
+<!--				<div class="col-md-6">-->
+<!--					<div class="card full-height">-->
+<!--						<div class="card-header">-->
+<!--							<div class="card-title">Health Tips</div>-->
+<!--						</div>-->
+<!--						<div class="card-body">-->
+<!--							<ol class="activity-feed">-->
+<!--								<li class="feed-item feed-item-secondary">-->
+<!--									<time class="date" datetime="9-25">Sep 25</time>-->
+<!--									<span class="text">Responded to need <a href="#">"Volunteer opportunity"</a></span>-->
+<!--								</li>-->
+<!--								<li class="feed-item feed-item-success">-->
+<!--									<time class="date" datetime="9-24">Sep 24</time>-->
+<!--									<span class="text">Added an interest <a href="#">"Volunteer Activities"</a></span>-->
+<!--								</li>-->
+<!--								<li class="feed-item feed-item-info">-->
+<!--									<time class="date" datetime="9-23">Sep 23</time>-->
+<!--									<span class="text">Joined the group <a href="single-group.php">"Boardsmanship Forum"</a></span>-->
+<!--								</li>-->
+<!--								<li class="feed-item feed-item-warning">-->
+<!--									<time class="date" datetime="9-21">Sep 21</time>-->
+<!--									<span class="text">Responded to need <a href="#">"In-Kind Opportunity"</a></span>-->
+<!--								</li>-->
+<!--								<li class="feed-item feed-item-danger">-->
+<!--									<time class="date" datetime="9-18">Sep 18</time>-->
+<!--									<span class="text">Created need <a href="#">"Volunteer Opportunity"</a></span>-->
+<!--								</li>-->
+<!--								<li class="feed-item">-->
+<!--									<time class="date" datetime="9-17">Sep 17</time>-->
+<!--									<span class="text">Attending the event <a href="single-event.php">"Some New Event"</a></span>-->
+<!--								</li>-->
+<!--							</ol>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				<div class="col-md-6">-->
+<!--					<div class="card card-primary bg-primary-gradient">-->
+<!--						<div class="card-body">-->
+<!--							<h4 class="mt-3 b-b1 pb-2 mb-4 fw-bold">Active user right now</h4>-->
+<!--							<h1 class="mb-4 fw-bold">17</h1>-->
+<!--							<h4 class="mt-3 b-b1 pb-2 mb-5 fw-bold">Page view per minutes</h4>-->
+<!--							<div id="activeUsersChart"></div>-->
+<!--							<h4 class="mt-5 pb-3 mb-0 fw-bold">Top active pages</h4>-->
+<!--							<ul class="list-unstyled">-->
+<!--								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/readypro/index.html</small> <span>7</span></li>-->
+<!--								<li class="d-flex justify-content-between pb-1 pt-1"><small>/product/atlantis/demo.html</small> <span>10</span></li>-->
+<!--							</ul>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+
+
+<!--			</div>-->
+
+
+
+
 		</div>
 	</div>
 
@@ -532,6 +418,11 @@
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="/static/assets/js/setting-demo.js"></script>
 	<script src="/static/assets/js/demo.js"></script>
+    <script src="/static/assets/js/setting-demo2.js"></script>
+    <script  src="/static/assets/js/jquery.vmap.js"></script>
+
+
+
 
 	<script>
 		Circles.create({
@@ -541,7 +432,7 @@
 			maxValue:100,
 			width:7,
 			text: 5,
-			colors:['#f1f1f1', '#FF9E27'],
+			colors:['#f1f1f1', '#2773ff'],
 			duration:400,
 			wrpClass:'circles-wrp',
 			textClass:'circles-text',
@@ -584,12 +475,13 @@
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
 			type: 'bar',
 			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
+				labels: ['smokday2','toldhi2 ','income2',"strength", "X_drnkdy4 ", "wtkg3",'blind','bloodcho'
+					,'htm4','sleptim1'],
 				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
+					label: "Top 10 Missing Ratio(%)",
+					backgroundColor: '#82cbed',
 					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
+					data: [56.3, 14.6, 14.5, 8.1, 4.8, 4.2,2.2,1.8,1.5,1.5],
 				}],
 			},
 			options: {
@@ -626,6 +518,280 @@
 			lineColor: '#ffa534',
 			fillColor: 'rgba(255, 165, 52, .14)'
 		});
+
+		 var doughnutChart = document.getElementById('doughnutChart').getContext('2d');
+    var myDoughnutChart = new Chart(doughnutChart, {
+			type: 'doughnut',
+			data: {
+				datasets: [{
+					data: [17.5, 32.5, 30.7,13.6,5.7],
+					backgroundColor: ['#28761e','#acd7b1','#93b9ed','#e77a4b','#a33529']
+				}],
+
+				labels: [
+				'Excellent(%)',
+				'Very Good(%)',
+					'Good(%)',
+					'Fair(%)',
+				'Poor(%)'
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend : {
+					position: 'bottom'
+				},
+				layout: {
+					padding: {
+						left: 20,
+						right: 20,
+						top: 20,
+						bottom: 20
+					}
+				}
+			}
+		});
+
+       var multipleLineChart = document.getElementById('multipleLineChart').getContext('2d'),
+			   bubbleChart = document.getElementById('bubbleChart').getContext('2d'),
+			   barChart = document.getElementById('barChart').getContext('2d'),
+
+			   multipleBarChart = document.getElementById('multipleBarChart').getContext('2d');
+
+
+       var myMultipleLineChart = new Chart(multipleLineChart, {
+			type: 'line',
+			data: {
+				labels:  ["Excellent", "Very Good", "Good", "Fair", "Poor"],
+				datasets: [{
+					label: "Average Sleep Time",
+					borderColor: "#1d7af3",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#1d7af3",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: [7.2, 7.1, 7.0, 6.9, 6.7]
+				},{
+					label: "Average Anaerobic Exercise",
+					borderColor: "#59d05d",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#59d05d",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: [72.1, 58.8, 44.3, 33.8, 27.8]
+				}, {
+					label: "Average Aerobic Exercise Time",
+					borderColor: "#f3545d",
+					pointBorderColor: "#FFF",
+					pointBackgroundColor: "#f3545d",
+					pointBorderWidth: 2,
+					pointHoverRadius: 4,
+					pointHoverBorderWidth: 1,
+					pointRadius: 4,
+					backgroundColor: 'transparent',
+					fill: true,
+					borderWidth: 2,
+					data: [137.4, 123.7, 100.0, 73.4, 45.4]
+				}]
+			},
+			options : {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					position: 'top',
+				},
+				tooltips: {
+					bodySpacing: 4,
+					mode:"nearest",
+					intersect: 0,
+					position:"nearest",
+					xPadding:10,
+					yPadding:10,
+					caretPadding:10
+				},
+				layout:{
+					padding:{left:15,right:15,top:15,bottom:15}
+				}
+			}
+		});
+
+		var myMultipleBarChart = new Chart(multipleBarChart, {
+			type: 'bar',
+			data: {
+				labels: ["Excellent", "Very Good", "Good", "Fair", "Poor"],
+				datasets : [{
+					label: "Female",
+					backgroundColor: '#eeacc9',
+					borderColor: '#e895af',
+					data: [49740, 93940, 87558, 40844, 17238],
+				}, {
+					label: "Male",
+					backgroundColor: '#177dff',
+					borderColor: '#177dff',
+					data: [85482-49740, 159076-93940, 150556- 87558, 66726-40844, 27951-17238],
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					position : 'bottom'
+				},
+				title: {
+					// display: true,
+					// text: 'Traffic Stats'
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false
+				},
+				responsive: true,
+				scales: {
+					xAxes: [{
+						stacked: true,
+					}],
+					yAxes: [{
+						stacked: true
+					}]
+				}
+			}
+		});
+
+
+		var myBubbleChart = new Chart(bubbleChart,{
+			type: 'bubble',
+			data: {
+				datasets:[{
+					label: "Positive Correlation",
+					data:[{x:0.291411468927239,y:0.9344492488951989,r:54.18942598934812/4},
+						{x: 0.2512548796710262, y: 0.18389445384687908, r: 49.14154485403943/4},
+						{x: 0.7928405436693508, y: 0.6677992628784772, r: 46.4869195321457/4},
+						{x: 0.47791889987923664, y: 0.6533435617175074, r: 35.158828564096474/4},
+						{x: 0.520114162492327, y: 0.9022647747932324, r: 33.76784663276632/4},
+						{x: 0.33313804171428707, y: 0.6028819089467368, r: 28.343664538397228/4},
+						{x: 0.11038078853230371, y: 0.38426712104460026, r: 25.407348603036116/4},
+						{x: 0.12439928797044264, y: 0.1810725453121954, r: 20.110528717942575/4},
+						{x: 0.6741123854903877, y: 0.8587149504998735, r: 14.994944661867411/4},
+						{x: 0.9549746520908448, y: 0.809603302854805, r: 14.32979967116573/4},
+						{x: 0.08248170107576047, y: 0.8799913528875278, r: 8.910671892452857/4}],
+					backgroundColor:"#716aca"
+				},
+				{
+					label: "Negative Correlation",
+					data:[{x: 0.5563727608325942, y: 0.05412590544733831, r: 7.234727305258046/4},
+						{x: 0.30314526004389397, y: 0.49217967055450274, r: 7.260065749258175/4},
+						{x: 0.6631771437663072, y: 0.8657992963749985, r: 17.662240378712532/4},
+						{x: 0.1482968790058098, y: 0.7057862091560203, r: 18.759787942034976/4},
+						{x: 0.3673578343873617, y: 0.8485875271897313, r: 32.421440585657294/4},
+						{x: 0.9547501170557013, y: 0.6412875792017085, r: 38.82171192161236/4},
+						{x: 0.6217153747051972, y: 0.5672111325474688, r: 48.81323073679184/4},
+						{x: 0.5181992504203962, y: 0.4055284295909507, r: 57.54737351716055/4},
+						{x: 0.4563882358202066, y: 0.036197073931475865, r: 61.457239808513/4},
+						{x: 0.6998503114139886, y: 0.34624253051063536, r: 95.55506975863217/4},
+						{x: 0.2844725608246985, y: 0.15043620482127895, r: 95.83420024384013/4}],
+					backgroundColor:"#1d7af3"
+				}],
+			},
+
+
+
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				legend: {
+					position: 'bottom'
+				},
+				scales: {
+					yAxes: [{
+						ticks: {
+							display: false //this will remove only the label
+						},
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}],
+					xAxes : [ {
+						ticks: {
+							display: false //this will remove only the label
+						},
+						gridLines : {
+							drawBorder: false,
+							display : false
+						}
+					}]
+				},
+			}
+		});
+		var myBarChart = new Chart(barChart, {
+			type: 'bar',
+			data: {
+				labels: ['bphigh4', 'havarth3', 'chccopd1', 'income2','diabete3',
+			'addepev2', 'cvdinfr4', 'blind',  'cvdcrhd4', 'exerhmm'],
+				datasets : [{
+					label: "improtance",
+					backgroundColor: '#716aca',
+					borderColor: '#716aca',
+					data: [ 0.14927332, 0.12438685,  0.09504144, 0.05732915, 0.056111608
+						, 0.05235321, 0.03886692, 0.038548883, 0.036980074,0.03514883],
+				}],
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						}
+					}]
+				},
+			}
+		});
+	var SweetAlert2Demo = function() {
+
+			//== Demos
+			var initDemos = function() {
+
+				$('#alert_demo_3_3').click(function(e) {
+					swal("Well Done!", "Your health data is being analyzed", {
+						icon : "success",
+						buttons: {
+							confirm: {
+								className : 'btn btn-success'
+							}
+						},
+					});
+				});
+
+			};
+
+			return {
+				//== Init
+				init: function() {
+					initDemos();
+				},
+			};
+		}();
+
+		//== Class Initialization
+		jQuery(document).ready(function() {
+			SweetAlert2Demo.init();
+		});
+
+
 	</script>
+
 
 {% endblock javascripts %}
