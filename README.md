@@ -7,7 +7,7 @@
 
 - [Directory Structure](#directory-structure)
 - [Download and Run the webpage](#download-and-run-the-webpage)
-- [Register/Login](#register-login)
+- [Register and Login](#register-login)
 - [Data Visualisation Webpage](#data-visualisation-webpage)
 - [Prediction Webpage](#prediction-webpage)
 - [Profile page](#profile-page)
@@ -110,7 +110,7 @@ export FLASK_APP=run.py
 flask run
 ```
 
-## Register/Login
+## Register and Login
 
 You can enter **any** information to **register** and **log in**.
 
