@@ -7,7 +7,7 @@
 
 - [Directory Structure](#directory-structure)
 - [Download and Run the webpage](#download-and-run-the-webpage)
-- [Register and Login](#register-login)
+- [Register and Login](#register-and-login)
 - [Data Visualisation Webpage](#data-visualisation-webpage)
 - [Prediction Webpage](#prediction-webpage)
 - [Profile page](#profile-page)
