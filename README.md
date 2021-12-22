@@ -8,6 +8,7 @@ Health Assessment Webpage is the final project of BIS634, which helps to predict
 ```python
 git clone https://github.com/hyj12345/Health-Assessment-Webpage.git
 cd Health-Assessment-Webpage
+pip3 install -r requirements.txt
 export FLASK_APP=run.py
 flask run
 ```
