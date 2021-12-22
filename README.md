@@ -5,6 +5,10 @@
 
 
 
+
+Health Assessment Webpage is the final project of BIS634, which helps to predict the daily health of the user. The webpage is based on the following three websites. They are [flask-dashboard-atlantis-dark](https://github.com/app-generator/flask-dashboard-atlantis-dark), [chartjs](https://www.chartjs.org/) and [Bootstrap4](https://bootstrap-flask.readthedocs.io/en/stable/)
+
+
 - [Directory Structure](#directory-structure)
 - [Download and Run the webpage](#download-and-run-the-webpage)
 - [Register and Login](#register-and-login)
@@ -12,11 +16,6 @@
 - [Prediction Webpage](#prediction-webpage)
 - [Profile page](#profile-page)
 - [Final Report and Slide](#report-and-slide)
-
-
-
-Health Assessment Webpage is the final project of BIS634, which helps to predict the daily health of the user. The webpage is based on the following three websites. They are [flask-dashboard-atlantis-dark](https://github.com/app-generator/flask-dashboard-atlantis-dark), [chartjs](https://www.chartjs.org/) and [Bootstrap4](https://bootstrap-flask.readthedocs.io/en/stable/)
-
 
 
 
