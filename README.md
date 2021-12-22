@@ -143,6 +143,6 @@ The last page is the user information page
 ![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.27.53.png)
 
 
-## Report
+## Report and Slide
 You can view my [final report and slide](https://github.com/hyj12345/Health-Assessment-Webpage/tree/main/Report) here.
 
