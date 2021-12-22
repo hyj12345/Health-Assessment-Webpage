@@ -144,5 +144,5 @@ The last page is the user information page
 
 
 ## Report
-You can view my ![final report and slide](https://github.com/hyj12345/Health-Assessment-Webpage/tree/main/Report) here.
+You can view my [final report and slide](https://github.com/hyj12345/Health-Assessment-Webpage/tree/main/Report) here.
 
