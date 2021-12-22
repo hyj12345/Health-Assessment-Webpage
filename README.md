@@ -45,6 +45,13 @@ This page shows the final prediction results and you can see the prediction scor
 ![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.27.40.png)
 ![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.27.46.png)
 
+
+You can click on the link below the Tips to go to a more specialist website for help.
+![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.42.16.png)
+![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.42.26.png)
+![image-20211031113158927](https://github.com/hyj12345/Health-Assessment-Webpage/blob/main/png/%E6%88%AA%E5%B1%8F2021-12-22%2014.42.35.png)
+
+
 ## Profile page
 The last page is the user information page
 
