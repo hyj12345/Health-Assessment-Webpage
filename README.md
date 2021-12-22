@@ -3,6 +3,84 @@
 
 Health Assessment Webpage is the final project of BIS634, which helps to predict the daily health of the user. The webpage is based on the following three websites. They are [flask-dashboard-atlantis-dark](https://github.com/app-generator/flask-dashboard-atlantis-dark),[chartjs](https://www.chartjs.org/) and [Bootstrap4](https://bootstrap-flask.readthedocs.io/en/stable/)
 
+
+The directory structure of the file is as follows
+
+
+```bash
+.
+├── CHANGELOG.md
+├── Dockerfile
+├── LICENSE.md
+├── Procfile
+├── __pycache__
+│   └── run.cpython-39.pyc
+├── apps
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-39.pyc
+│   │   └── config.cpython-39.pyc
+│   ├── authentication
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── routes.py
+│   │   └── util.py
+│   ├── config.py
+│   ├── db.sqlite3
+│   ├── home
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── brfss_final.csv
+│   │   ├── data_proprocessing.py
+│   │   ├── model.pkl
+│   │   ├── model.py
+│   │   └── routes.py
+│   ├── static
+│   │   ├── Bean.gif
+│   │   └── assets
+│   └── templates
+│       ├── accounts
+│       ├── home
+│       ├── includes
+│       └── layouts
+├── docker-compose.yml
+├── gunicorn-cfg.py
+├── media
+│   ├── flask-dashboard-atlantis-dark-card-low.jpg
+│   ├── flask-dashboard-atlantis-dark-card-low.png
+│   ├── flask-dashboard-atlantis-dark-card.jpg
+│   ├── flask-dashboard-atlantis-dark-card.png
+│   ├── flask-dashboard-atlantis-dark-content-image-low.png
+│   ├── flask-dashboard-atlantis-dark-content-image.png
+│   ├── flask-dashboard-atlantis-dark-intro.gif
+│   ├── flask-dashboard-atlantis-dark-screen-1-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-1.png
+│   ├── flask-dashboard-atlantis-dark-screen-2-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-2.png
+│   ├── flask-dashboard-atlantis-dark-screen-3-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-3.png
+│   ├── flask-dashboard-atlantis-dark-screen-4-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-4.png
+│   ├── flask-dashboard-atlantis-dark-screen-login-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-login.png
+│   ├── flask-dashboard-atlantis-dark-screen-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-register-low.png
+│   ├── flask-dashboard-atlantis-dark-screen-register.png
+│   └── flask-dashboard-atlantis-dark-screen.png
+├── nginx
+│   └── appseed-app.conf
+├── package.json
+├── requirements-mysql.txt
+├── requirements-pgsql.txt
+├── requirements.txt
+├── run.py
+└── runtime.txt
+
+```
+
+
 ## Download and run the webpage
 
 ```python
