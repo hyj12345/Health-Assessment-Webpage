@@ -97,7 +97,7 @@ flask run
 
 ## Register/Login
 
-You can enter **any** information to register and log in.
+You can enter **any** information to **register** and **log in**.
 
 
 
